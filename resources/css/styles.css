@@ -1,0 +1,228 @@
+h1 {
+    /*leyendas en handwriting*/
+    font-family: 'Autography';
+    font-size: 2.4rem;
+}
+
+h2 {
+    /*subtitulos cosmética natural*/
+    font-family: 'roboto';
+    font: 'light'; 
+    font-weight: 300;
+    font-size: 1.1rem;
+}
+
+h3 {
+    /*subtitulos únete / iniciar sesión + leyenda footer*/
+    font-family: 'roboto';
+    font-weight: 100;
+    font-size: 1rem;
+}
+
+h4 {/*menú secciones*/
+    font-family: 'roboto';
+    font: 'light'; 
+    font-weight: 300;
+    font-size: 0.92rem;
+}
+
+h5 {
+    font-family: 'roboto';
+    font-weight: 100;
+    font-size: 1.3rem;
+}
+
+h6 { /*Texto footer*/
+    font-family: 'roboto';
+    font: 'regular';
+    font-weight: 400;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+h7 { 
+    font-family: 'roboto';
+    font: 'regular';
+    font-weight: 400;
+    font-size: 0.9rem;
+}
+
+p { /*texto pantallas*/ 
+    font-family: 'rubik';
+    font-size: 0.9rem;
+}
+
+body {
+   
+    background-size: cover;
+    position: relative;
+}
+
+.navbar-background {
+    background-color: rgb(209, 196, 233);
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu {
+    margin-top: 0;
+}
+
+.pie-pagina {
+    width: 100%;
+    background-color: rgb(179 157 219);
+}
+
+.pie-pagina .grupo-1 {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 50px;
+    padding: 10px 0px;
+}
+
+.pie-pagina .grupo-1 .box figure {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pie-pagina .grupo-1 .box h2 {
+    color: #000;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.pie-pagina .grupo-1 .box p {
+    color: #000;
+    margin-bottom: 10px;
+}
+
+.pie-pagina .grupo-1 .red-social a {
+    display: inline-block;
+    text-decoration: none;
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    color: #fff;
+    margin-right: 10px;
+    background-color: #000;
+    text-align: center;
+    transition: all 300ms ease;
+}
+
+.pie-pagina .grupo-1 .red-social a:hover {
+    color: rgb(138, 233, 146);
+}
+
+.pie-pagina .grupo-2 {
+    background-color: #000;
+    padding: 8px 8px;
+    text-align: center;
+    color: #fff;
+}
+
+.pie-pagina .grupo-2 small {
+    font-size: 12.5px;
+}
+
+a {
+    color: black;
+}
+
+@media screen and (max-width:800px) {
+    .pie-pagina .grupo-1 {
+        width: 90%;
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 30px;
+        padding: 35px 0px;
+    }
+}
+
+.card {
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.btn{
+    background-color: rgb(179 157 219);
+}
+
+input[type=text] {
+    border-color:  rgb(179 157 219);
+    background-color: transparent;
+    border-radius: 20px;
+}
+
+input[type=file] {
+    border-color:  rgb(179 157 219);
+    background-color: transparent;
+    border-radius: 20px;
+}
+
+input[type=email] {
+    border-color:  rgb(179 157 219);
+    background-color: transparent;
+    border-radius: 20px;
+}
+
+input[type=button] {
+    border-color: rgb(179 157 219);
+    background-color: transparent;
+    border-radius: 10px;
+    color: rgb(179 157 219);
+}
+
+li {
+    display:inline-block; 
+    padding-left:3px;
+    padding-right:5px;
+}
+
+/* Añadir bootstrap class y quitar este estilo */
+input[type=password] {
+    border-color: rgb(179 157 219);
+    background-color: transparent;
+    border-radius: 20px;
+}
+
+/* input[type=submit] {
+    border-color: rgb(179 157 219);
+    background-color: transparent;
+    border-radius: 20px;
+} */
+
+.w-40{
+    width:40%
+}
+.w-80{
+    width:80%
+}
+
+
+
+
+.btn-search{
+    border-color:  rgb(179 157 219);
+    background-color: transparent;
+    border-radius: 15px;
+}
+
+.cart-overlay{
+    position: absolute;
+    display: block;
+    z-index: 10;
+    width: 100%;
+    max-height: 100%;
+    padding-top: 15px;
+    text-align: center;
+    overflow-y: auto;
+    align-items: center;
+    bottom: 25%;
+}
