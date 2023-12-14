@@ -6,25 +6,43 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Cart;
 use App\Models\Product;
+use App\Models\PostalCodePrice;
 use Illuminate\Database\QueryException;
 
 class CartController extends Controller
 {
+    public function getCart(){
+        return Cart::join('products','carts.product_id','=','products.id')->where('carts.user_id','=',Auth::id())->select('carts.*','products.name','products.unit_price','products.image')->get();
+    }
+
+    public function calcularTotal($cart){
+        $total = 0;
+        foreach($cart as $c){
+            $total = $total + $c->unit_price*$c->quantity;
+        }
+        return $total;
+    }
+    public function getPostalCodePrice($postalCode){
+        $postalCodePrice = PostalCodePrice::where('from_postal_code','<=',$postalCode)->where('to_postal_code','>=',$postalCode)->first();
+        return $postalCodePrice->price;
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $cart = Cart::join('products','carts.product_id','=','products.id')->where('carts.user_id','=',Auth::id())->select('carts.*','products.name','products.unit_price','products.image')->get();
-        $subtotal = 0;
-        foreach($cart as $c){
-            $subtotal = $subtotal + $c->unit_price*$c->quantity;
-        }
-        
 
-        return view('cart.index',[ 'cart' => $cart, 'subtotal' =>$subtotal ]);
+    
+    public function index(Request $request)
+    {
+        $cart = $this->getCart();
+        $subtotal = $this->calcularTotal($cart);
+        $sendingPrice = 0;
+        if($request->postalcode>=1000 && $request->postalcode<10000){
+            $sendingPrice = $this->getPostalCodePrice($request->postalcode);
+        }
+        return view('cart.index',[ 'cart' => $cart, 'subtotal' =>$subtotal, 'sendingPrice' => $sendingPrice,'postalcode' => $request->postalcode ]);
     }
 
     /**
@@ -122,6 +140,10 @@ class CartController extends Controller
 
     public function remove($id){
         Cart::where('id','=',$id)->decrement('quantity');
+        $cart = Cart::find($id);
+        if($cart->quantity <= 0){
+            $cart->delete();
+        }
         return redirect()->route('cart.index');
     }
 
@@ -130,8 +152,10 @@ class CartController extends Controller
         return redirect()->route('cart.index');
     }
 
-    public function sendingprice(Request $request){
-        $postalcode = $request->postalcode;
-        return redirect()->route('cart.index',['postalcode' => $postalcode]);
+
+    public function delete(){
+        Cart::where('carts.user_id','=',Auth::id())->delete();
+        return true;
     }
+   
 }

@@ -48,12 +48,4 @@
         </div>
     </div>
 
-    <div class="row mt-4 justify-content-center">        
-        <h6 class="mb-4">
-            <i class="fa-light fa-location-dot"></i>
-            Pick Up: Recordá que podes retirar tus pedidos en el showroom de lunes a viernes de 15:00 a
-            19:00 hs.
-        </h6>    
-        <img class="img-fluid mb-5" src="img/Medio_pago.jpg" alt="Imágen medios de pago">
-    </div>
 @endsection

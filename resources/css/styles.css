@@ -40,12 +40,6 @@ h6 { /*Texto footer*/
     text-align: center;
 }
 
-h7 { 
-    font-family: 'roboto';
-    font: 'regular';
-    font-weight: 400;
-    font-size: 0.9rem;
-}
 
 p { /*texto pantallas*/ 
     font-family: 'rubik';
@@ -150,6 +144,18 @@ a {
     border-color: transparent;
 }
 
+.custom_card {
+    background-color: transparent;
+    border-color: transparent;
+    max-width: 80%;
+    height: auto;
+}
+
+.card_home {
+    box-shadow: 3px 3px 11;
+    border-radius: 25px;
+}
+
 .btn{
     background-color: rgb(179 157 219);
 }
@@ -185,18 +191,11 @@ li {
     padding-right:5px;
 }
 
-/* Añadir bootstrap class y quitar este estilo */
 input[type=password] {
     border-color: rgb(179 157 219);
     background-color: transparent;
     border-radius: 20px;
 }
-
-/* input[type=submit] {
-    border-color: rgb(179 157 219);
-    background-color: transparent;
-    border-radius: 20px;
-} */
 
 .w-40{
     width:40%
@@ -204,9 +203,6 @@ input[type=password] {
 .w-80{
     width:80%
 }
-
-
-
 
 .btn-search{
     border-color:  rgb(179 157 219);

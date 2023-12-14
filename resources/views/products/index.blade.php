@@ -49,7 +49,7 @@
                     <div class="col">
                         <div class="card rounded-3 text-black m-4 display: flex;">
                             <a href="{{ route('products.show',$p)}}">
-                                <img src="{{ Storage::url('/products/'.$p->image) }}" class="card-img" alt="Imágen bálsamo labial">
+                                <img src="{{ Storage::url('/products/'.$p->image) }}" class="card-img" alt="Imagen producto">
                             </a>
                             <div class="cart-overlay">                                
                                 <form id="frmaddcart{{$p->id}}" method="post" action="{{ route('cart.store')}}"> 

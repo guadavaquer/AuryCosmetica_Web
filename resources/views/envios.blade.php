@@ -8,17 +8,12 @@
         </div>
         <div class="p-5 row text-justify">
 
-            <p>Cada paquete nos lleva entre 1 a 3 días hábiles de preparación y corren desde el día siguiente al que
+            <p>Cada paquete nos lleva aproximadamente entre uno a tres días hábiles de preparación y corren desde el día siguiente al que
                 se acredita el pago.</p>
 
-            <p>Hacemos envíos a todo el país. Al efectuarse la compra te vamos a enviar un código para que puedas
-                seguir el estado de tu pedido en todo momento y garantizarte la mejor atención.
+            <p>Hacemos envíos a todo el país y en nuestra página vas a poder calcular el costo del mismo. Al efectuarse la compra te vamos 
+                a enviar un código para que puedas seguir el estado de tu pedido en todo momento y garantizarte siempre la mejor atención.
             </p>
-
-            <p>Si elegiste la modalidad para retirar en el Showroom vamos a estar enviándote un mail a tu casilla
-                cuando tus productos estén listos para ser retirados. Aproximadamente nos lleva entre 1 y 2 días
-                hábiles.</p>
-
 
             <div style="color: #5E35B1;">
                 <p>En caso que no hayas recibido el mail de que hemos recibido tu pedido envianos un mail a nuestra

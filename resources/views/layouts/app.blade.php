@@ -58,14 +58,14 @@
                 @else
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ Auth::user()->name }}
+                           ¡Hola {{ Auth::user()->name }}!
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                                 document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
+                                {{ __('Cerrar sesión') }}
                             </a>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -91,11 +91,13 @@
                     <li><a href="{{ route('envios') }}">ENVÍOS</a></li>
                     @if(Auth::user() and Auth::user()->is_admin)
                     <li><a href="{{ route('products.catalog') }}">CATALOGO DE PRODUCTOS</a></li>
+                    <li><a href="{{ route('users.index') }}">GESTIÓN DE USUARIOS</a></li>
+                    <li><a href="{{ route('po.index') }}">ORDENES</a></li>
                     @endif
                 </ul>
             </h4>
         </div>
-        <div class="col mt-2 mb-2  text-right"><a href="{{ route('cart.index')}}"><i class="fa-light fa-bag-shopping" style="font-size: 1.6rem"></i> ({{$countCart}})</a></div>
+        <div class="col-2 mt-2 mb-2  text-right"><a href="{{ route('cart.index')}}"><i class="fa-light fa-bag-shopping" style="font-size: 1.6rem"></i> ({{$countCart}})</a></div>
     </div>
 
     
