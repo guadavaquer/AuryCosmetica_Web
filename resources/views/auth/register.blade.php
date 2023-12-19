@@ -41,6 +41,28 @@
                         </div>
                         <div class="row">
                             <div class="col form-group">
+                                <label for="Dni" class="form-label text-md-end">{{ __('Dni') }}</label>
+                                <input id="dni" type="text" class="form-control @error('dni') is-invalid @enderror" name="dni" value="{{ old('dni') }}" required autocomplete="dni" placeholder="Ingresar dni" maxlength="8">
+                                @error('dni')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                             </div>                            
+                        </div>
+                        <div class="row">
+                            <div class="col form-group">
+                                <label for="Phone" class="form-label text-md-end">{{ __('Telefono') }}</label>
+                                <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="dni" placeholder="Ingresar telefono">
+                                @error('phone')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                             </div>                            
+                        </div>
+                        <div class="row">
+                            <div class="col form-group">
                                 <label for="Contraseña" class="form-label text-md-end">{{ __('Contraseña') }}</label>
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Ingresar contraseña">
 
@@ -59,8 +81,7 @@
                         </div>
                         <div class="row mt-4">
                             <div class="col form-group">
-                                <input  style="border-radius:15px" type="submit" value="{{ __('Únete') }}" class="btn  ff-RobotoRegular text-white form-control">
-                                
+                                <input  style="border-radius:15px" type="submit" value="{{ __('Únete') }}" class="btn  ff-RobotoRegular text-white form-control">  
                             </div>                            
                         </div>
                     </form>

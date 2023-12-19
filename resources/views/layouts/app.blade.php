@@ -56,15 +56,20 @@
                         <a href="{{ route('login') }}">Iniciar sesión</a></div>
                     <div style="display:inline-block; font-size:1.3rem" class="align-middle"><i class="fa-light fa-circle-user ml-2" ></i></div>
                 @else
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown cart-link">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                            ¡Hola {{ Auth::user()->name }}!
                         </a>
 
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" style= "background-color: #EDE7F6;">
+
+                            <a class="dropdown-item" href="{{ route('cuenta') }}">
+                                {{ __('Mi cuenta') }}
+                            </a>
+
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
-                                                document.getElementById('logout-form').submit();">
+                                    document.getElementById('logout-form').submit();">
                                 {{ __('Cerrar sesión') }}
                             </a>
 
@@ -82,7 +87,7 @@
     
     <div class="navbar navbar-expand-lg">
         <div class="col mt-3 mb-2">
-            <h4>
+            <h4 class="cart-link">
                 <ul style="padding-left: 2%; text-align-center">
                     <li><a href="{{ route('index') }}">INICIO</a></li>
                     <li><a href="{{ route('quienes_somos') }}">QUIENES SOMOS</a></li>
@@ -97,7 +102,7 @@
                 </ul>
             </h4>
         </div>
-        <div class="col-2 mt-2 mb-2  text-right"><a href="{{ route('cart.index')}}"><i class="fa-light fa-bag-shopping" style="font-size: 1.6rem"></i> ({{$countCart}})</a></div>
+        <div class="cart-link col-2 mt-2 mb-2  text-right"><a href="{{ route('cart.index')}}"><i class="fa-light fa-bag-shopping" style="font-size: 1.6rem"></i> ({{$countCart}})</a></div>
     </div>
 
     

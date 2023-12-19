@@ -27,8 +27,7 @@
                 <form id="frmaddcart{{$product->id}}" method="post" action="{{ route('cart.store')}}"> 
                     @csrf
                     @method("POST")
-                    <input name="product_id" type="hidden" value="{{$product->id}}">
-                    <span class="btn btn-primary" onclick="frmaddcart{{$product->id}}.submit()">Agregar al carrito</span>
+                    <span class="btn btn-primary cart-link" onclick="frmaddcart{{$product->id}}.submit()">Agregar al carrito</span>
                 </form>
             </div>
         </div>

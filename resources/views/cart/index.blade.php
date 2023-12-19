@@ -39,7 +39,7 @@
                                     <form id="frm{{$c->id}}" method="post" action="{{route('cart.destroy',$c)}}" class="p-0 m-0 d-inline">
                                         @csrf
                                         @method('DELETE')
-                                        <span class="fa fa-trash" type="submit" onclick="frm{{$c->id}}.submit()"></span>
+                                        <span class="fa-light fa-trash-can" type="submit" onclick="frm{{$c->id}}.submit()"></span>
                                     </form>
                                     
                                 </h2>
@@ -77,61 +77,85 @@
             <form id="frmSendingPrice" method="GET" action="{{route('cart.index')}}">
             <div class="row">
                 <div class="col">
-                    <input name="postalcode" type="text" class="form-control" placeholder="Código postal" value="@isset($postalcode) {{$postalcode}} @endisset"  minlength="4" maxlength="4" />
+                    <input id="postalcode" name="postalcode" type="text" class="form-control" placeholder="Código postal" value="@isset($postalcode) {{$postalcode}} @endisset"  minlength="4" maxlength="4" style="border-radius: 15px;"/>
                 </div>
-                <div class="col">
-                    <input type="button" value="CALCULAR" onclick="submit()" />
+                <div class="col text-right mr-4 mt-1">
+                    <input type="button" value="CALCULAR" onclick="calcularEnvio()" />
                 </div>
             </div>
             </form>
             <div class="row mt-3">
                 <div class="col">
-                    <h2>Subtotal</h2>
+                    <h2 class="ml-1">Subtotal</h2>
                 </div>
                 <div class="col pr-5 text-right">
-                    ${{$subtotal}}
+                ${{number_format($subtotal,2)}}
                 </div>
             </div>
             <div class="row">
                 <div class="col mt-2">
-                    <h2>Envio</h2>
+                    <h2 class="ml-1">Envio</h2>
                 </div>
                 <div class="col col pr-5 text-right mt-2">
-                    ${{$sendingPrice}}
+                ${{number_format($sendingPrice,2)}}
                 </div>
             </div>
             
             <div class="row">
-                <hr class="border w-80 pl-0 ml-3" style="border:0.75px solid black !important">
+                <hr class="border w-80 pl-0 ml-3" style="border:0.75px solid; color: rgb(179 157 219); !important">
             </div>
             <div class="row">
                 <div class="col">
                     <h5>Total</h5>
                 </div>
                 <div class="col pr-5 text-right">
-                    ${{$subtotal+$sendingPrice}}
+                    ${{number_format($subtotal+$sendingPrice,2)}}
                 </div>
             </div>
             <div class="col-1  pl-5 pr-5 content-align-center mt-2">
                 <div class="col text-center ml-3"> 
                     <h3>
                         @if(count($cart)>0)
-                            <form id="frmCreatepo" method="GET" action="{{route('po.create')}}">
+                            <form id="frmCreatepo" method="POST" action="{{route('po.payment')}}">
+                                @csrf
                                 <input name="sendingPrice" type="hidden" value="{{$sendingPrice}}">
                                 <input name="postalcode" type="hidden" value="{{$postalcode}}">
-                            <!-- <a href="{{route('po.create',$sendingPrice)}}"> -->
-                                <input type="button" style="color: white; background-color: black; border-color: black; height:1.8rem;width:9rem" value="Iniciar compra" onclick="submit()"/>
-                                <!-- </a> -->
+                                <input type="button" onclick="iniciarCompra()" class="btn mr-2" value="INICIAR COMPRA" style="color: black; background-color: rgb(179 157 219);"/>
+
                             </form>
                         @endif
                     </h3>
                 </div>
             </div>
             <div class="row pl-5 content-align-center mt-3 ml-2">
-                <div class="col">
+                <div class="cart-link col">
                 <a href="{{route('products.index')}}">VER MAS PRODUCTOS</a>
             </div>
             </div>
         </div> 
     </div>
+
+<script languague="javascript">
+    function iniciarCompra(){
+        var d = document.getElementsByName("sendingPrice")[0].value;
+        if(d == 0){
+            alert('Debe ingresar un código postal de envío para continuar');
+        }
+        else{
+            var frm = document.getElementById("frmCreatepo");
+            frm.submit();
+        }
+    }
+
+    function calcularEnvio(){
+        var postalcode = document.getElementById("postalcode").value;
+        if(postalcode.length != 4){
+            alert('El número de código postal debe contener al menos 4 dígitos');
+        }
+        else{
+            var frm = document.getElementById("frmSendingPrice");
+            frm.submit();
+        }
+    }
+</script>
 @endsection

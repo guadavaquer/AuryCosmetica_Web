@@ -4,6 +4,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PurchaseOrderController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -47,7 +48,11 @@ Route::group(['middleware' => ['auth']],function(){
 
     Route::get('/purchaseOrder',[PurchaseOrderController::class,"index"])->name('po.index');
     Route::post('/purchaseOrder',[PurchaseOrderController::class,"store"])->name('po.store');
-    Route::get('/purchaseOrder/create',[PurchaseOrderController::class,"create"])->name('po.create');
+    Route::get('/purchaseOrder/create',[PurchaseOrderController::class,"create"]); // Se invoca al retornar las validaciones del formulario de creacion de orden en el metodo Store de la PO
+    Route::post('/purchaseOrder/create',[PurchaseOrderController::class,"create"])->name('po.create'); // Se usa para enviar la informacion de sending price y postal code desde la pagina payment
+    Route::post('/purchaseOrder/payment',[PurchaseOrderController::class,"payment"])->name('po.payment');
+
+    Route::get('/cuenta',[HomeController::class,"cuenta"])->name('cuenta');
 });
 
 //Route::resource('products',ProductsController::class);

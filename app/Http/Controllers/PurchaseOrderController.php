@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Auth;
@@ -17,12 +18,29 @@ class PurchaseOrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    const poPerPage = 8;
     public function index()
     {
-        $c = new CartController();
+        /*$c = new CartController();
         $cart = $c->getCart();
         $total = $c->calcularTotal($cart);
         return view('purchaseOrders.index',[ 'cart' => $cart, 'total' =>$total ]);
+        */
+        $po = PurchaseOrder::join('users', 'purchase_orders.user_id', '=', 'users.id')
+        ->where('purchase_orders.id','=',request()->query('search'))
+        ->orWhere('users.id','=',request()->query('search'))
+        ->orWhere('users.name','like','%'.request()->query('search').'%')
+        ->orWhere('users.email','like','%'.request()->query('search').'%')
+        ->select('purchase_orders.id as purchase_order_id',
+        'purchase_orders.total_amount as total_amount',
+        'purchase_orders.send_price as send_price',
+        'purchase_orders.created_at as created_at',
+        'users.id as user_id',
+        'users.name as name',
+        'users.email as email')
+        ->orderBy('purchase_orders.id')->paginate(self::poPerPage)
+        ;
+        return view("purchaseOrders.index", ['po'=> $po]);
     }
 
     /**
@@ -37,7 +55,17 @@ class PurchaseOrderController extends Controller
         $total = $c->calcularTotal($cart);
         $sendingPrice = $request->input('sendingPrice');
         $postalcode = $request->input('postalcode');
-        return view('purchaseOrders.create',[ 'cart' => $cart, 'total' =>$total, 'sendingPrice'=>$sendingPrice, 'postalcode'=>$postalcode, 'request'=>$request]);
+        return view('purchaseOrders.create',[ 'cart' => $cart, 'subtotal' =>$total, 'sendingPrice'=>$sendingPrice, 'postalcode'=>$postalcode, 'request'=>$request]);
+    }
+
+    public function payment(Request $request)
+    {
+        $c = new CartController();
+        $cart = $c->getCart();
+        $total = $c->calcularTotal($cart);
+        $sendingPrice = $request->input('sendingPrice');
+        $postalcode = $request->input('postalcode');
+        return view('purchaseOrders.payment',[ 'cart' => $cart, 'subtotal' =>$total, 'sendingPrice'=>$sendingPrice, 'postalcode'=>$postalcode, 'request'=>$request]);
     }
 
     /**
@@ -67,22 +95,20 @@ class PurchaseOrderController extends Controller
             'numeric' => 'El campo debe ser numérico.',
             'regex' => 'El formato no coincide, se admiten como máximo hasta 6 números enteros y hasta 2 decimales.',
             'max' => 'El tamaño máximo del campo no de,be exceder los :max caracteres.'
-        ])->stopOnFirstFailure(true);
+        ]);
 
         
-        $validator->validate();
+        $validator->stopOnFirstFailure()->validate();
         
         if($request->sendingPrice==0){
             $errorSendingPrice ='Se debe calcular el costo de envio para continuar';
             return view('purchaseOrders.create',[ "errorSendingPrice" => $errorSendingPrice, "request" => $request]);
         }
         
-        
-
         $c = new CartController();
         $cart = $c->getCart();
 
-        //Crear la purchaseOrder
+        //Crear la purchaseOrder en BBDD
         $po = PurchaseOrder::create([
             'user_id' => Auth::id(),
             'total_amount' =>  $c->calcularTotal($cart),
@@ -148,6 +174,9 @@ class PurchaseOrderController extends Controller
     {
         //
     }
-
-
+/*
+    public function getPurchaseOrders(){
+        return PurchaseOrder::where('user_id','=',Auth::id())->get();
+    }
+*/
 }

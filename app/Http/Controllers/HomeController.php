@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Controllers\PurchaseOrderController;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -25,4 +25,12 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    public function cuenta()
+    {
+        $po = new PurchaseOrderController();
+        $orders = $po->getPurchaseOrders();
+        return view('cuenta', ['orders'=>$orders]);
+    }
+
 }

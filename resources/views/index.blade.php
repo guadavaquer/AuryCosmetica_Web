@@ -27,8 +27,6 @@
             </div>
         </div>
 
-
-
         <div class="row m-auto align-items-center">
             <div style= "box-shadow: 3px 3px 11 border-radius: 25px" class="col-4 mb-4">
                 <img src="img/Card-01.png" height="250" width="250" alt="Imágen apto veganos">
@@ -41,6 +39,5 @@
             </div>
 
         </div>
-
 
 @endsection
